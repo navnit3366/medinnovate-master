@@ -1,0 +1,52 @@
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'index' %}">Med-Innovate</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                    </li>
+                    {% if user.person %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'doctors'%}">Doctors</a>
+                    </li>
+                    {% endif %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about'%}">Contact</a>
+                    </li>
+
+                </ul>
+                <ul class="navbar-nav ml-auto">
+
+                    {% if user.is_authenticated %}
+
+                    {% if user.doctor %}
+                    <li class="nav-item mr-2"><a class="btn btn-outline-info" href="{% url 'inquiries' %}">Inquiries</a>
+                    </li>
+                    {% elif user.person %}
+                    <li class="nav-item mr-2"><a class="btn btn-outline-info" href="{% url 'reports' %}">Reports</a>
+                    </li>
+                    {% endif %}
+
+                    <li><a class="btn btn-outline-danger" href="{% url 'account_logout' %}">Logout </a></li>
+
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="btn btn-primary mr-2 mt-1 btn-lg" aria-current="page"
+                            href="{% url 'account_signup' %}">Sign
+                            Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-success mt-1 btn-lg" aria-current="page" href="{% url 'account_login' %}">Sign
+                            In</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
